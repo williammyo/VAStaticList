@@ -1,0 +1,19 @@
+{
+  "name": "VA Disability Static List",
+  "version": "1.0",
+  "manifest_version": 3,
+  "permissions": ["activeTab", "storage", "tabs", "webNavigation", "scripting"],
+  "host_permissions": ["https://va.gov/*", "https://api.va.gov/*"],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://va.gov/*", "https://api.va.gov/*"],
+      "js": ["contentScript.js"]
+    }
+  ]
+}

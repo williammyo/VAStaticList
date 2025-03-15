@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>VA Disability Table</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto', 'Segoe UI', Arial, sans-serif;
+      width: 700px;
+      margin: 0;
+      padding: 10px;
+      box-sizing: border-box;
+      background-color: #f5f5f5;
+      color: #333;
+      /* Set a fixed height to fit all content without scrolling */
+      min-height: 600px;
+      /* Adjusted based on content */
+    }
+
+    h1 {
+      text-align: left;
+      color: #1a3c34;
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    /* Toggleable Disclaimer */
+    .disclaimer {
+      background-color: #fff3cd;
+      border-left: 5px solid #ffc107;
+      padding: 10px;
+      margin-bottom: 15px;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .disclaimer h3 {
+      color: #856404;
+      margin: 0;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .disclaimer-content {
+      display: none;
+      /* Hidden by default */
+      margin-top: 5px;
+    }
+
+    /* Combined Rating Section */
+    .combined-rating {
+      background-color: white;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+      padding: 10px;
+      margin-bottom: 15px;
+      font-size: 14px;
+      text-align: left;
+    }
+
+    .combined-rating p {
+      margin: 5px 0;
+    }
+
+    #status {
+      text-align: left;
+      margin: 10px 0;
+      font-size: 12px;
+      color: #555;
+    }
+
+    .section {
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-size: 14px;
+      margin-bottom: 5px;
+      color: #2e6e5e;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: white;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    th,
+    td {
+      padding: 8px 10px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+      font-size: 12px;
+    }
+
+    th {
+      background-color: #34495e;
+      color: white;
+      font-weight: 600;
+    }
+
+    table {
+      table-layout: fixed;
+    }
+
+    th:nth-child(1),
+    td:nth-child(1) {
+      width: 35%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      position: relative;
+    }
+
+    th:nth-child(2),
+    td:nth-child(2) {
+      width: 15%;
+      text-align: center;
+    }
+
+    th:nth-child(3),
+    td:nth-child(3) {
+      width: 10%;
+      text-align: center;
+    }
+
+    th:nth-child(4),
+    td:nth-child(4) {
+      width: 20%;
+      text-align: center;
+    }
+
+    th:nth-child(5),
+    td:nth-child(5) {
+      width: 10%;
+      text-align: center;
+    }
+
+    th:nth-child(6),
+    td:nth-child(6) {
+      width: 10%;
+      text-align: center;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tr:hover td {
+      background-color: #f5f5f5;
+    }
+
+    .bilateral td {
+      background-color: #f8f9fa;
+    }
+
+    td {
+      background-color: white;
+    }
+
+    .error {
+      color: red;
+      text-align: left;
+      font-size: 12px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    td:nth-child(1):hover::after {
+      content: attr(data-full-text);
+      position: absolute;
+      background-color: #333;
+      color: white;
+      padding: 8px 12px;
+      border-radius: 5px;
+      font-size: 12px;
+      white-space: normal;
+      max-width: 300px;
+      z-index: 10;
+      top: 100%;
+      left: 0;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      word-wrap: break-word;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    td:nth-child(1):hover::after {
+      opacity: 1;
+    }
+
+    .logged-out-message {
+      background-color: white;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+      padding: 15px;
+      text-align: left;
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    /* Fixed Footer */
+    .footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 700px;
+      background-color: #f5f5f5;
+      display: flex;
+      justify-content: flex-end;
+      font-size: 10px;
+      color: #555;
+      padding: 10px 0;
+      border-top: 1px solid #ddd;
+      z-index: 1000;
+      align-items: center;
+      /* Vertically center the content */
+    }
+
+    .footer span,
+    .footer a {
+      margin: 0 5px;
+      /* Consistent spacing between elements */
+    }
+
+    .footer a {
+      color: #2e6e5e;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Terms Page Styles */
+    .terms-page {
+      display: none;
+    }
+
+    .terms-page h1 {
+      font-size: 24px;
+      color: #1a3c34;
+      margin-bottom: 20px;
+    }
+
+    .terms-page p,
+    .terms-page ul {
+      font-size: 14px;
+      line-height: 1.6;
+      margin: 10px 0;
+    }
+
+    .terms-page h4 {
+      font-size: 16px;
+      color: #2e6e5e;
+      margin-top: 15px;
+      margin-bottom: 5px;
+    }
+
+    .terms-page ul {
+      padding-left: 20px;
+    }
+
+    .back-button {
+      display: inline-block;
+      margin-bottom: 20px;
+      font-size: 14px;
+      color: #0071eb;
+      text-decoration: none;
+    }
+
+    .back-button:hover {
+      text-decoration: underline;
+    }
+
+    .back-button::before {
+      content: '← ';
+      font-size: 16px;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Main Page -->
+  <div id="mainPage">
+    <h1>VA DISABILITY STATIC LIST</h1>
+
+    <div class="disclaimer">
+      <h3 id="disclaimerToggle">Important Disclaimer</h3>
+      <div class="disclaimer-content">
+        <p>Data Accuracy Warning:</p>
+        <ul>
+          <li>This information may be incomplete or inaccurate for claims filed before 2013.</li>
+          <li>A system change at the VA affects the reliability of disability rating data for pre-2013 claims.</li>
+          <li>For definitive information, always verify details directly with your VA file.</li>
+          <li>Use this information as a reference only, not as an official record.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="combinedRating" class="combined-rating hidden">
+      <p><strong>Combined Disability Rating:</strong> <span id="combinedRatingValue"></span>%</p>
+      <p><strong>Permanent & Total:</strong> <span id="permanentTotal"></span></p>
+      <p><strong>Effective Date:</strong> <span id="effectiveDate"></span></p>
+    </div>
+
+    <div id="status">Fetching data...</div>
+    <div id="errorMessage" class="error hidden"></div>
+    <div id="loggedOutMessage" class="logged-out-message hidden">
+      Please log in to view your VA Disability Static List.
+    </div>
+
+    <div class="section">
+      <h2>Service-Connected Disabilities</h2>
+      <table id="serviceConnectedTable" class="hidden">
+        <thead>
+          <tr>
+            <th>Condition</th>
+            <th>Diagnostic Code</th>
+            <th>Rating (%)</th>
+            <th>Effective Date</th>
+            <th>Static</th>
+            <th>Rating End Date</th>
+          </tr>
+        </thead>
+        <tbody id="serviceConnectedBody"></tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <h2>Non-Service-Connected Disabilities</h2>
+      <table id="nonServiceConnectedTable" class="hidden">
+        <thead>
+          <tr>
+            <th>Condition</th>
+            <th>Diagnostic Code</th>
+            <th>Rating (%)</th>
+            <th>Effective Date</th>
+            <th>Static</th>
+            <th>Rating End Date</th>
+          </tr>
+        </thead>
+        <tbody id="nonServiceConnectedBody"></tbody>
+      </table>
+    </div>
+
+    <div class="footer">
+      <span>VA Disability Static List © 2025 is licensed under</span>
+      <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="noreferrer">CC
+        BY-NC-ND 4.0</a>
+      <a href="#" id="termsLink">Terms and Conditions</a>
+    </div>
+  </div>
+
+  <!-- Terms Page -->
+  <div id="termsPage" class="terms-page">
+    <a href="#" id="backButton" class="back-button">Go Back to List</a>
+    <h1>Terms and Conditions</h1>
+    <p>Welcome to the VA Disability Static List Chrome Extension!</p>
+    <p>These terms and conditions outline the rules and regulations for the use of the VA Disability Static List Chrome
+      Extension.</p>
+    <p>By accessing this extension, we assume you accept these terms and conditions. Do not continue to use VA
+      Disability Static List if you do not agree to all the terms and conditions stated on this page.</p>
+    <p>The following terminology applies to these Terms and Conditions: "User", "You", and "Your" refer to you, the
+      person using this extension. "We", "Our", and "Us" refer to the creators of VA Disability Static List. All terms
+      refer to the offer and acceptance necessary to provide this extension’s services under applicable law.</p>
+    <h4>Data Usage</h4>
+    <p>This extension displays hard-coded VA disability data as a reference. It does not collect or store any personal
+      user data, nor does it employ cookies or tracking mechanisms.</p>
+    <h4>License</h4>
+    <p>VA Disability Static List is licensed under CC BY-NC-ND 4.0. Unless otherwise stated, the creators of VA
+      Disability Static List own the intellectual property rights for all material in this extension. All intellectual
+      property rights are reserved. You may use this extension for personal reference, subject to the restrictions set
+      in these terms and conditions.</p>
+    <p>You must not:</p>
+    <ul>
+      <li>Republish material from VA Disability Static List.</li>
+      <li>Sell, rent, or sub-license material from VA Disability Static List.</li>
+      <li>Reproduce, duplicate, or copy material from VA Disability Static List for distribution.</li>
+      <li>Redistribute content from VA Disability Static List.</li>
+    </ul>
+    <p>This Agreement began on 11/7/2023.</p>
+    <h4>Content Liability</h4>
+    <p>The data in this extension is hard-coded and provided for reference only. We are not responsible for its accuracy
+      or completeness. You agree to use this extension at your own risk and verify all information with official VA
+      records.</p>
+    <h4>Disclaimer</h4>
+    <p>To the maximum extent permitted by applicable law, we exclude all representations, warranties, and conditions
+      relating to this extension and its use. This extension is provided free of charge, and we will not be liable for
+      any loss or damage arising from its use, including but not limited to inaccuracies in the hard-coded data.</p>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+
+</html>

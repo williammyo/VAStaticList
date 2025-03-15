@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Terms and Conditions</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto', 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f5f5f5;
+      color: #333;
+      width: 700px;
+    }
+
+    .back-button {
+      display: inline-block;
+      margin-bottom: 20px;
+      font-size: 14px;
+      color: #0071eb;
+      /* Matches the blue color from the reference */
+      text-decoration: none;
+    }
+
+    .back-button:hover {
+      text-decoration: underline;
+    }
+
+    .back-button::before {
+      content: '← ';
+      font-size: 16px;
+      vertical-align: middle;
+    }
+
+    h1 {
+      font-size: 24px;
+      color: #1a3c34;
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    p,
+    ul {
+      font-size: 14px;
+      line-height: 1.6;
+      text-align: left;
+      margin: 10px 0;
+    }
+
+    h4 {
+      font-size: 16px;
+      color: #2e6e5e;
+      margin-top: 15px;
+      margin-bottom: 5px;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <a href="#" class="back-button" onclick="window.close()">Go Back to List</a>
+
+  <h1>Terms and Conditions</h1>
+  <p>Welcome to the VA Disability Static List Chrome Extension!</p>
+  <p>These terms and conditions outline the rules and regulations for the use of the VA Disability Static List Chrome
+    Extension.</p>
+  <p>By accessing this extension, we assume you accept these terms and conditions. Do not continue to use VA Disability
+    Static List if you do not agree to all the terms and conditions stated on this page.</p>
+  <p>The following terminology applies to these Terms and Conditions: "User", "You", and "Your" refer to you, the person
+    using this extension. "We", "Our", and "Us" refer to the creators of VA Disability Static List. All terms refer to
+    the offer and acceptance necessary to provide this extension’s services under applicable law.</p>
+
+  <h4>Data Usage</h4>
+  <p>This extension displays hard-coded VA disability data as a reference. It does not collect or store any personal
+    user data, nor does it employ cookies or tracking mechanisms.</p>
+
+  <h4>License</h4>
+  <p>VA Disability Static List is licensed under CC BY-NC-ND 4.0. Unless otherwise stated, the creators of VA Disability
+    Static List own the intellectual property rights for all material in this extension. All intellectual property
+    rights are reserved. You may use this extension for personal reference, subject to the restrictions set in these
+    terms and conditions.</p>
+  <p>You must not:</p>
+  <ul>
+    <li>Republish material from VA Disability Static List.</li>
+    <li>Sell, rent, or sub-license material from VA Disability Static List.</li>
+    <li>Reproduce, duplicate, or copy material from VA Disability Static List for distribution.</li>
+    <li>Redistribute content from VA Disability Static List.</li>
+  </ul>
+  <p>This Agreement began on 11/7/2023.</p>
+
+  <h4>Content Liability</h4>
+  <p>The data in this extension is hard-coded and provided for reference only. We are not responsible for its accuracy
+    or completeness. You agree to use this extension at your own risk and verify all information with official VA
+    records.</p>
+
+  <h4>Disclaimer</h4>
+  <p>To the maximum extent permitted by applicable law, we exclude all representations, warranties, and conditions
+    relating to this extension and its use. This extension is provided free of charge, and we will not be liable for any
+    loss or damage arising from its use, including but not limited to inaccuracies in the hard-coded data.</p>
+
+  <script>
+    document.querySelector('.back-button').addEventListener('click', (e) => {
+      e.preventDefault();
+      window.close();
+    });
+  </script>
+</body>
+
+</html>
