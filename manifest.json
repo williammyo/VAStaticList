@@ -4,16 +4,26 @@
   "manifest_version": 3,
   "permissions": ["activeTab", "storage", "tabs", "webNavigation", "scripting"],
   "host_permissions": ["https://va.gov/*", "https://api.va.gov/*"],
-  "action": {
-    "default_popup": "popup.html"
-  },
   "background": {
     "service_worker": "background.js"
   },
   "content_scripts": [
     {
       "matches": ["https://va.gov/*", "https://api.va.gov/*"],
-      "js": ["contentScript.js"]
+      "js": ["contentScript.js"
     }
-  ]
+  ],
+    "icons": {
+        "16": "logos/icon16.png",
+        "48": "logos/icon48.png",
+        "128": "logos/icon128.png"
+    },
+    "action": {
+        "default_popup": "popup.html",
+        "default_icon": {
+            "16": "logos/icon16.png",
+            "32": "logos/icon32.png",
+            "48": "logos/icon48.png"
+        }
+    }
 }
