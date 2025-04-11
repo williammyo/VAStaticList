@@ -1,6 +1,6 @@
-## VA Disability Static List - Chrome Extension
+## VA Disability Static List - Web Extension
 
-Welcome! This Chrome extension is designed to help you quickly and easily access your VA disability static list information directly in your browser.
+Welcome! This Web extension is designed to help you quickly and easily access your VA disability static list information directly in your browser.
 
 ### What is it?
 
