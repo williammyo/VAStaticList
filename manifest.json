@@ -10,10 +10,10 @@
   "content_scripts": [
     {
       "matches": ["https://va.gov/*", "https://api.va.gov/*"],
-      "js": ["contentScript.js"
+      "js": ["contentScript.js"]
     }
   ],
-    "icons": {
+  "icons": {
         "16": "logos/icon16.png",
         "48": "logos/icon48.png",
         "128": "logos/icon128.png"
