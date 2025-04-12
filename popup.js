@@ -55,39 +55,39 @@ document.addEventListener('DOMContentLoaded', () => {
   } else {
     console.error("Back button not found!");
   }
+});
 
-  // Get references to elements
-  const statusDiv = document.getElementById("status");
-  const errorDiv = document.getElementById("errorMessage");
-  const loggedOutMessage = document.getElementById("loggedOutMessage");
-  const serviceTable = document.getElementById("serviceConnectedTable");
-  const nonServiceTable = document.getElementById("nonServiceConnectedTable");
-  const combinedRatingDiv = document.getElementById("combinedRating");
+// Get references to elements
+const statusDiv = document.getElementById("status");
+const errorDiv = document.getElementById("errorMessage");
+const loggedOutMessage = document.getElementById("loggedOutMessage");
+const serviceTable = document.getElementById("serviceConnectedTable");
+const nonServiceTable = document.getElementById("nonServiceConnectedTable");
+const combinedRatingDiv = document.getElementById("combinedRating");
 
-  // Automatically start the fetch process when the popup opens
+// Set default state: show loggedOutMessage, hide others
+statusDiv.classList.add("hidden");
+errorDiv.classList.add("hidden");
+loggedOutMessage.classList.remove("hidden");
+serviceTable.classList.add("hidden");
+nonServiceTable.classList.add("hidden");
+combinedRatingDiv.classList.add("hidden");
+// Automatically start the fetch process when the popup opens
+setTimeout(() => {
   console.log("Sending fetchApiData message...");
   chrome.runtime.sendMessage({ action: "fetchApiData" }, (response) => {
     if (chrome.runtime.lastError) {
       const errorMessage = chrome.runtime.lastError.message || JSON.stringify(chrome.runtime.lastError);
       console.error("Failed to send message:", errorMessage);
+      const errorDiv = document.getElementById("errorMessage");
       errorDiv.classList.remove("hidden");
       errorDiv.textContent = `Error: Failed to fetch data: ${errorMessage}`;
-      statusDiv.classList.add("hidden");
-      loggedOutMessage.classList.add("hidden");
+      document.getElementById("status").classList.add("hidden");
     } else {
       console.log("Message sent successfully, response:", response);
-       loggedOutMessage.classList.add("hidden");
     }
   });
-
-  // Set default state: hide loggedOutMessage, show loading message, hide others
-  statusDiv.classList.remove("hidden");
-  errorDiv.classList.add("hidden");
-  loggedOutMessage.classList.add("hidden");
-  serviceTable.classList.add("hidden");
-  nonServiceTable.classList.add("hidden");
-  combinedRatingDiv.classList.add("hidden");
-});
+}, 500);
 
 // Keep the popup open by adding a dummy event listener
 document.addEventListener("mousemove", () => {}, true);
@@ -186,10 +186,10 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     combinedRatingDiv.classList.add("hidden");
     errorDiv.textContent = request.message;
   } else if (request.action === "loggedOut") {
-    console.log("User is logged out, displaying logged-out message.");  
+    console.log("User is logged out, displaying logged-out message.");
+    loggedOutMessage.textContent = "Please log in to va.gov to view your VA Disability Static List."
     statusDiv.classList.add("hidden");
     errorDiv.classList.add("hidden");
-    loggedOutMessage.textContent = "Please log in to va.gov to view your VA Disability Static List.";
     loggedOutMessage.classList.remove("hidden");
     serviceTable.classList.add("hidden");
     nonServiceTable.classList.add("hidden");
