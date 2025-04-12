@@ -57,6 +57,21 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+// Get references to elements
+const statusDiv = document.getElementById("status");
+const errorDiv = document.getElementById("errorMessage");
+const loggedOutMessage = document.getElementById("loggedOutMessage");
+const serviceTable = document.getElementById("serviceConnectedTable");
+const nonServiceTable = document.getElementById("nonServiceConnectedTable");
+const combinedRatingDiv = document.getElementById("combinedRating");
+
+// Set default state: show loggedOutMessage, hide others
+statusDiv.classList.add("hidden");
+errorDiv.classList.add("hidden");
+loggedOutMessage.classList.remove("hidden");
+serviceTable.classList.add("hidden");
+nonServiceTable.classList.add("hidden");
+combinedRatingDiv.classList.add("hidden");
 // Automatically start the fetch process when the popup opens
 setTimeout(() => {
   console.log("Sending fetchApiData message...");
@@ -80,14 +95,10 @@ document.addEventListener("mousemove", () => {}, true);
 // Listen for messages to display the table or errors
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   console.log("Popup received message:", request);
-  const statusDiv = document.getElementById("status");
-  const errorDiv = document.getElementById("errorMessage");
-  const loggedOutMessage = document.getElementById("loggedOutMessage");
-  const serviceTable = document.getElementById("serviceConnectedTable");
-  const nonServiceTable = document.getElementById("nonServiceConnectedTable");
+
   const serviceTableBody = document.getElementById("serviceConnectedBody");
   const nonServiceTableBody = document.getElementById("nonServiceConnectedBody");
-  const combinedRatingDiv = document.getElementById("combinedRating");
+
 
   if (request.action === "displayTable") {
     console.log("Popup received data:", request.data);
@@ -176,6 +187,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     errorDiv.textContent = request.message;
   } else if (request.action === "loggedOut") {
     console.log("User is logged out, displaying logged-out message.");
+    loggedOutMessage.textContent = "Please log in to va.gov to view your VA Disability Static List."
     statusDiv.classList.add("hidden");
     errorDiv.classList.add("hidden");
     loggedOutMessage.classList.remove("hidden");
