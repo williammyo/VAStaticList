@@ -1,32 +1,7 @@
-// Hard-coded JSON data as a fallback
+// Fallback message for when data cannot be fetched
 const fallbackData = {
-  "data": {
-    "id": "",
-    "type": "disability_ratings",
-    "attributes": {
-      "combined_disability_rating": 100,
-      "combined_effective_date": "2023-12-01",
-      "legal_effective_date": "2023-11-06",
-      "individual_ratings": [
-        {"decision": "Service Connected", "effective_date": "2023-09-05", "rating_end_date": null, "rating_percentage": 50, "diagnostic_type_code": "6847", "diagnostic_type_name": "Sleep Apnea Syndromes", "diagnostic_text": "obstructive sleep apnea", "disability_rating_id": "93958278", "static_ind": true},
-        {"decision": "Service Connected", "effective_date": "2023-11-06", "rating_end_date": null, "rating_percentage": 10, "diagnostic_type_code": "8520", "diagnostic_type_name": "Paralysis of the sciatic nerve", "diagnostic_text": "radiculopathy, left lower extremity", "disability_rating_id": "97019981", "static_ind": true},
-        {"decision": "Service Connected", "effective_date": "2023-09-26", "rating_end_date": null, "rating_percentage": 30, "diagnostic_type_code": "8100", "diagnostic_type_name": "Migraine", "diagnostic_text": "migraine", "disability_rating_id": "94487862", "static_ind": true},
-        {"decision": "Service Connected", "effective_date": "2023-11-06", "rating_end_date": null, "rating_percentage": 10, "diagnostic_type_code": "8520", "diagnostic_type_name": "Paralysis of the sciatic nerve", "diagnostic_text": "radiculopathy, right lower extremity", "disability_rating_id": "97019980", "static_ind": true},
-        {"decision": "Not Service Connected", "effective_date": null, "rating_end_date": null, "rating_percentage": null, "diagnostic_type_code": "5206", "diagnostic_type_name": "Limited flexion of the forearm", "diagnostic_text": "arm condition, right", "disability_rating_id": "93958274", "static_ind": false},
-        {"decision": "Service Connected", "effective_date": "2023-04-17", "rating_end_date": null, "rating_percentage": 20, "diagnostic_type_code": "5261", "diagnostic_type_name": "Limitation of extension, knee", "diagnostic_text": "left knee, patellar tendinitis", "disability_rating_id": "93958277", "static_ind": true},
-        {"decision": "Not Service Connected", "effective_date": null, "rating_end_date": null, "rating_percentage": null, "diagnostic_type_code": "5260", "diagnostic_type_name": "Limitation of flexion, knee", "diagnostic_text": "right knee sprain", "disability_rating_id": "93958273", "static_ind": false},
-        {"decision": "Not Service Connected", "effective_date": null, "rating_end_date": null, "rating_percentage": null, "diagnostic_type_code": "5271", "diagnostic_type_name": "Limitation of motion of the ankle", "diagnostic_text": "left ankle sprain", "disability_rating_id": "93958275", "static_ind": false},
-        {"decision": "Not Service Connected", "effective_date": null, "rating_end_date": null, "rating_percentage": null, "diagnostic_type_code": "5271", "diagnostic_type_name": "Limitation of motion of the ankle", "diagnostic_text": "right ankle sprain", "disability_rating_id": "93958280", "static_ind": false},
-        {"decision": "Service Connected", "effective_date": "2023-04-16", "rating_end_date": null, "rating_percentage": 10, "diagnostic_type_code": "6260", "diagnostic_type_name": "Tinnitus", "diagnostic_text": "tinnitus", "disability_rating_id": "93958279", "static_ind": true},
-        {"decision": "Not Service Connected", "effective_date": null, "rating_end_date": null, "rating_percentage": null, "diagnostic_type_code": "5206", "diagnostic_type_name": "Limited flexion of the forearm", "diagnostic_text": "arm condition, left", "disability_rating_id": "93958276", "static_ind": false},
-        {"decision": "Service Connected", "effective_date": "2023-11-06", "rating_end_date": null, "rating_percentage": 40, "diagnostic_type_code": "5243", "diagnostic_type_name": "Intervertebral Disc Syndrome", "diagnostic_text": "strain and intervertebral disc syndrome, lumbosacral spine", "disability_rating_id": "84648626", "static_ind": true},
-        {"decision": "Service Connected", "effective_date": "2023-09-05", "rating_end_date": null, "rating_percentage": 70, "diagnostic_type_code": "9411", "diagnostic_type_name": "Post traumatic stress disorder", "diagnostic_text": "posttraumatic stress disorder with panic attacks, major depressive disorder and alcohol use disorder", "disability_rating_id": "84648624", "static_ind": true},
-        {"decision": "Not Service Connected", "effective_date": null, "rating_end_date": null, "rating_percentage": null, "diagnostic_type_code": "6002", "diagnostic_type_name": "Scleritis", "diagnostic_text": "vision", "disability_rating_id": "93958281", "static_ind": true}
-      ]
-    }
-  }
+  "message": "Error fetching data. Please try again later."
 };
-
 // Log when the background script is loaded
 console.log("Background script loaded.");
 
