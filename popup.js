@@ -57,37 +57,36 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+// Automatically start the fetch process when the popup opens
+console.log("Sending fetchApiData message...");
+chrome.runtime.sendMessage({ action: "fetchApiData" }, (response) => {
+  if (chrome.runtime.lastError) {
+    const errorMessage = chrome.runtime.lastError.message || JSON.stringify(chrome.runtime.lastError);
+    console.error("Failed to send message:", errorMessage);
+    const errorDiv = document.getElementById("errorMessage");
+    errorDiv.classList.remove("hidden");
+    errorDiv.textContent = `Error: Failed to fetch data: ${errorMessage}`;
+    document.getElementById("status").classList.add("hidden");
+  } else {
+    console.log("Message sent successfully, response:", response);
+  }
+});
+
 // Get references to elements
 const statusDiv = document.getElementById("status");
 const errorDiv = document.getElementById("errorMessage");
 const loggedOutMessage = document.getElementById("loggedOutMessage");
 const serviceTable = document.getElementById("serviceConnectedTable");
 const nonServiceTable = document.getElementById("nonServiceConnectedTable");
-const combinedRatingDiv = document.getElementById("combinedRating");
+const combinedRatingDiv = document.getElementById("combinedRating");;
 
-// Set default state: show loggedOutMessage, hide others
-statusDiv.classList.add("hidden");
+// Set default state: show fetching data message, hide others
+statusDiv.classList.remove("hidden");
 errorDiv.classList.add("hidden");
-loggedOutMessage.classList.remove("hidden");
+loggedOutMessage.classList.add("hidden");
 serviceTable.classList.add("hidden");
 nonServiceTable.classList.add("hidden");
 combinedRatingDiv.classList.add("hidden");
-// Automatically start the fetch process when the popup opens
-setTimeout(() => {
-  console.log("Sending fetchApiData message...");
-  chrome.runtime.sendMessage({ action: "fetchApiData" }, (response) => {
-    if (chrome.runtime.lastError) {
-      const errorMessage = chrome.runtime.lastError.message || JSON.stringify(chrome.runtime.lastError);
-      console.error("Failed to send message:", errorMessage);
-      const errorDiv = document.getElementById("errorMessage");
-      errorDiv.classList.remove("hidden");
-      errorDiv.textContent = `Error: Failed to fetch data: ${errorMessage}`;
-      document.getElementById("status").classList.add("hidden");
-    } else {
-      console.log("Message sent successfully, response:", response);
-    }
-  });
-}, 500);
 
 // Keep the popup open by adding a dummy event listener
 document.addEventListener("mousemove", () => {}, true);
